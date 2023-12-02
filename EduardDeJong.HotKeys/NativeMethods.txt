@@ -1,0 +1,4 @@
+RegisterHotKey
+UnregisterHotKey
+WM_HOTKEY
+SendInput
