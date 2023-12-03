@@ -1,3 +1,13 @@
+SetWindowsHookEx
+UnhookWindowsHookEx
+CallNextHookEx
+GetKeyState
+GetKeyboardState
+WM_KEYDOWN
+WM_KEYUP
+WM_SYSKEYDOWN
+WM_SYSKEYUP
+KEYBDINPUT
 RegisterHotKey
 UnregisterHotKey
 WM_HOTKEY
