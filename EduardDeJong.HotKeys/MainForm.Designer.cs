@@ -28,7 +28,9 @@ partial class MainForm
     /// </summary>
     private void InitializeComponent()
     {
+        components = new System.ComponentModel.Container();
         HeaderLabel = new System.Windows.Forms.Label();
+        NotifyIcon = new System.Windows.Forms.NotifyIcon(components);
         SuspendLayout();
         // 
         // HeaderLabel
@@ -40,6 +42,11 @@ partial class MainForm
         HeaderLabel.Size = new System.Drawing.Size(340, 45);
         HeaderLabel.TabIndex = 0;
         HeaderLabel.Text = "(HotKeys app window)";
+        // 
+        // NotifyIcon
+        // 
+        NotifyIcon.Visible = true;
+        NotifyIcon.Click += NotifyIcon_Click;
         // 
         // MainForm
         // 
@@ -59,4 +66,5 @@ partial class MainForm
     #endregion
 
     private System.Windows.Forms.Label HeaderLabel;
+    private System.Windows.Forms.NotifyIcon NotifyIcon;
 }

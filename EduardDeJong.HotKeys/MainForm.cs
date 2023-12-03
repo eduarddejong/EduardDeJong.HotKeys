@@ -1,3 +1,4 @@
+using EduardDeJong.HotKeys.Properties;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -39,6 +40,10 @@ public unsafe partial class MainForm : Form
     public MainForm()
     {
         InitializeComponent();
+
+        Icon = Resources.HotKeysIcon;
+        NotifyIcon.Icon = Resources.HotKeysIcon;
+        WindowState = FormWindowState.Minimized;
     }
 
     protected override void OnLoad(EventArgs e)
@@ -50,6 +55,8 @@ public unsafe partial class MainForm : Form
             PInvoke.UnregisterHotKey((HWND)Handle, index);
             PInvoke.RegisterHotKey((HWND)Handle, index, hotKey.FsModifiers, (uint)hotKey.Vk);
         }
+
+        BeginInvoke(Hide);
     }
 
     protected override void OnFormClosing(FormClosingEventArgs e)
@@ -60,6 +67,31 @@ public unsafe partial class MainForm : Form
         }
 
         base.OnFormClosing(e);
+    }
+
+    protected override void OnResize(EventArgs e)
+    {
+        base.OnResize(e);
+
+        if (WindowState == FormWindowState.Minimized)
+        {
+            Hide();
+        }
+    }
+
+    private void NotifyIcon_Click(object sender, EventArgs e)
+    {
+        if (WindowState == FormWindowState.Minimized)
+        {
+            Show();
+            WindowState = FormWindowState.Normal;
+            Activate();
+        }
+        else
+        {
+            WindowState = FormWindowState.Minimized;
+            Hide();
+        }
     }
 
     protected override void WndProc(ref Message m)
