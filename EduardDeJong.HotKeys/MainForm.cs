@@ -26,6 +26,16 @@ public unsafe partial class MainForm : Form
             Vk: Keys.CapsLock,
             // Do nothing
             Action: (out bool intercept) => intercept = false),
+
+        new(ModifiersState: [(key: Keys.LWin, state: new(Down: true))],
+            Vk: Keys.W,
+            Action: (out bool intercept) =>
+            {
+                intercept = true;
+                ExecuteCommand(
+                    fileName: "firefox",
+                    arguments: Array.Empty<string>());
+            }),
     ];
 
     private static readonly HotKey[] _hotKeys = [
@@ -34,12 +44,6 @@ public unsafe partial class MainForm : Form
             Action: () => SendKeyboardInputs([
                 new(wVk: (VIRTUAL_KEY)Keys.LWin),
                 new(wVk: (VIRTUAL_KEY)Keys.D1)])),
-
-        new(FsModifiers: HOT_KEY_MODIFIERS.MOD_WIN | HOT_KEY_MODIFIERS.MOD_SHIFT,
-            Vk: Keys.B,
-            Action: () => ExecuteCommand(
-                fileName: "firefox",
-                arguments: Array.Empty<string>())),
 
         new(FsModifiers: HOT_KEY_MODIFIERS.MOD_WIN,
             Vk: Keys.C,
